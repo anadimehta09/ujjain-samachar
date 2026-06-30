@@ -119,7 +119,7 @@ async def upload_news(
         "description": description,
 
         "media":
-            f"http://127.0.0.1:8000/{media_path}",
+            f"https://ujjain-samachar.onrender.com/{media_path}",
 
         "type":
             "video"
@@ -210,7 +210,7 @@ async def update_news(
                 "description": description,
 
                 "media":
-                    f"http://127.0.0.1:8000/{media_path}",
+                    f"https://ujjain-samachar.onrender.com/{media_path}",
 
                 "type":
                     "video"
@@ -323,7 +323,7 @@ async def add_team_member(
         "description": description,
 
         "image":
-            f"http://127.0.0.1:8000/{image_path}"
+            f"https://ujjain-samachar.onrender.com/{image_path}"
     }
 
     team_collection.insert_one(new_member)
@@ -385,7 +385,7 @@ async def upload_reel(
         "title": title,
 
         "video":
-            f"http://127.0.0.1:8000/{video_path}"
+            f"https://ujjain-samachar.onrender.com/{video_path}"
     }
 
     reels_collection.insert_one(new_reel)
