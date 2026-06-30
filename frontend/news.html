@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>News Details</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial;
+    }
+
+    body{
+      background:#f5f7fb;
+      padding:40px;
+    }
+
+    .news-box{
+
+      max-width:900px;
+
+      margin:auto;
+
+      background:white;
+
+      padding:30px;
+
+      border-radius:20px;
+
+      box-shadow:0 5px 20px rgba(0,0,0,0.08);
+
+    }
+
+    img{
+      width:100%;
+      border-radius:15px;
+      margin-bottom:25px;
+    }
+
+    h1{
+      margin-bottom:20px;
+    }
+
+    p{
+      line-height:1.8;
+      color:#444;
+      font-size:18px;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <div class="news-box" id="newsBox">
+
+  </div>
+
+  <script>
+
+    const params = new URLSearchParams(window.location.search);
+
+    const newsId = params.get("id");
+
+    async function loadSingleNews(){
+
+      const response = await fetch(
+        `http://127.0.0.1:8000/news/${newsId}`
+      );
+
+      const news = await response.json();
+
+      document.getElementById("newsBox").innerHTML = `
+
+        ${
+  news.type === "video"
+
+  ?
+
+  `
+    <video
+      controls
+      autoplay
+      muted
+      style="
+        width:100%;
+        border-radius:15px;
+      "
+    >
+      <source src="${news.media}">
+    </video>
+  `
+
+  :
+
+  `
+    <img
+      src="${news.media}"
+      style="
+        width:100%;
+        border-radius:15px;
+      "
+    >
+  `
+}
+
+        <h1>${news.title}</h1>
+
+        <p>${news.description}</p>
+
+      `;
+
+    }
+
+    loadSingleNews();
+
+  </script>
+
+</body>
+</html>
