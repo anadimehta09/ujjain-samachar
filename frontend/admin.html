@@ -314,14 +314,14 @@
     );
 
     let url =
-      "http://127.0.0.1:8000/upload-news";
+      "https://ujjain-samachar.onrender.com/upload-news";
 
     let method = "POST";
 
     if(editId){
 
       url =
-        `http://127.0.0.1:8000/update-news/${editId}`;
+        `https://ujjain-samachar.onrender.com/update-news/${editId}`;
 
       method = "PUT";
 
@@ -350,7 +350,7 @@
   async function loadAdminNews(){
 
     const response = await fetch(
-      "http://127.0.0.1:8000/news"
+      "https://ujjain-samachar.onrender.com/news"
     );
 
     const newsData = await response.json();
@@ -465,7 +465,7 @@
   async function deleteNews(id){
 
     await fetch(
-      `http://127.0.0.1:8000/delete-news/${id}`,
+      `https://ujjain-samachar.onrender.com/delete-news/${id}`,
       {
         method:"DELETE"
       }
@@ -506,7 +506,7 @@ async function updateBreakingNews(){
     ).value;
 
   await fetch(
-    "http://127.0.0.1:8000/breaking-news",
+    "https://ujjain-samachar.onrender.com/breaking-news",
     {
       method:"PUT",
 
@@ -584,7 +584,7 @@ teamForm.addEventListener(
     );
 
     const response = await fetch(
-      "http://127.0.0.1:8000/add-team",
+      "https://ujjain-samachar.onrender.com/add-team",
       {
         method:"POST",
         body:formData
@@ -602,7 +602,7 @@ teamForm.addEventListener(
 async function loadAdminTeam(){
 
   const response = await fetch(
-    "http://127.0.0.1:8000/team"
+    "https://ujjain-samachar.onrender.com/team"
   );
 
   const teamData = await response.json();
@@ -670,7 +670,7 @@ async function loadAdminTeam(){
 async function deleteTeam(id){
 
   await fetch(
-    `http://127.0.0.1:8000/delete-team/${id}`,
+    `https://ujjain-samachar.onrender.com/delete-team/${id}`,
     {
       method:"DELETE"
     }
@@ -707,7 +707,7 @@ reelForm.addEventListener(
     );
 
     const response = await fetch(
-      "http://127.0.0.1:8000/upload-reel",
+      "https://ujjain-samachar.onrender.com/upload-reel",
       {
         method:"POST",
         body:formData
@@ -728,7 +728,7 @@ reelForm.addEventListener(
 async function loadAdminReels(){
 
   const response = await fetch(
-    "http://127.0.0.1:8000/reels"
+    "https://ujjain-samachar.onrender.com/reels"
   );
 
   const reels = await response.json();
@@ -792,7 +792,7 @@ async function loadAdminReels(){
 async function deleteReel(id){
 
   await fetch(
-    `http://127.0.0.1:8000/delete-reel/${id}`,
+    `https://ujjain-samachar.onrender.com/delete-reel/${id}`,
     {
       method:"DELETE"
     }
