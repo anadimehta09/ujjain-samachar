@@ -1,7 +1,7 @@
 async function loadNews() {
 
   const response = await fetch(
-    "http://127.0.0.1:8000/news"
+    "https://ujjain-samachar.onrender.com/news"
   );
 
   const newsData = await response.json();
@@ -147,7 +147,7 @@ async function searchNews(){
       .toLowerCase();
 
   const response = await fetch(
-    "http://127.0.0.1:8000/news"
+    "https://ujjain-samachar.onrender.com/news"
   );
 
   const newsData = await response.json();
@@ -289,7 +289,7 @@ async function searchNews(){
 async function likeNews(id){
 
   await fetch(
-    `http://127.0.0.1:8000/like-news/${id}`,
+    `https://ujjain-samachar.onrender.com/like-news/${id}`,
     {
       method:"PUT"
     }
@@ -313,7 +313,7 @@ async function addComment(id){
 
   await fetch(
 
-    `http://127.0.0.1:8000/comment-news/${id}`,
+    `https://ujjain-samachar.onrender.com/comment-news/${id}`,
 
     {
       method:"PUT",
@@ -346,7 +346,7 @@ async function addComment(id){
 
   await fetch(
 
-    `http://127.0.0.1:8000/comment-news/${id}`,
+    `https://ujjain-samachar.onrender.com/comment-news/${id}`,
 
     {
       method:"PUT",
@@ -368,7 +368,7 @@ async function addComment(id){
 async function loadBreakingNews(){
 
   const response = await fetch(
-    "http://127.0.0.1:8000/breaking-news"
+    "https://ujjain-samachar.onrender.com/breaking-news"
   );
 
   const data = await response.json();
@@ -383,7 +383,7 @@ loadBreakingNews();
 async function loadTeam(){
 
   const response = await fetch(
-    "http://127.0.0.1:8000/team"
+    "https://ujjain-samachar.onrender.com/team"
   );
 
   const teamData = await response.json();
@@ -452,7 +452,7 @@ loadTeam();
 async function loadHomeReels(){
 
   const response = await fetch(
-    "http://127.0.0.1:8000/reels"
+    "https://ujjain-samachar.onrender.com/reels"
   );
 
   const reels = await response.json();
