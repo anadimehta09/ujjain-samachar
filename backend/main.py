@@ -38,8 +38,9 @@ app.add_middleware(
 
 # ================= MONGODB =================
 
-client = MongoClient("mongodb://localhost:27017")
+MONGODB_URL = os.getenv("MONGODB_URL")
 
+client = MongoClient(MONGODB_URL)
 db = client["ujjain_samachar"]
 
 news_collection = db["news"]
