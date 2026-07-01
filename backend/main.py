@@ -296,10 +296,13 @@ async def add_team_member(
     image: UploadFile = File(...)
 ):
 
-    image_path = f"uploads/{image.filename}"
+    # Upload image to Cloudinary
+    result = cloudinary.uploader.upload(
+        image.file,
+        resource_type="image"
+    )
 
-    with open(image_path, "wb") as buffer:
-        shutil.copyfileobj(image.file, buffer)
+    image_url = result["secure_url"]
 
     team_count = team_collection.count_documents({})
 
@@ -319,8 +322,7 @@ async def add_team_member(
 
         "description": description,
 
-        "image":
-            f"https://ujjain-samachar.onrender.com/{image_path}"
+        "image": image_url
     }
 
     team_collection.insert_one(new_member)
