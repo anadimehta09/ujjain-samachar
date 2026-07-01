@@ -114,6 +114,12 @@ async function loadNews() {
           ❤️ ${news.likes || 0}
         </button>
 
+        <button
+    onclick="shareNews(${news.id}, '${news.title}')"
+    class="news-btn"
+>
+    📤 Share
+</button>
         <a href="news.html?id=${news.id}">
 
           <button class="news-btn">
@@ -268,6 +274,12 @@ async function searchNews(){
           ❤️ ${news.likes || 0}
         </button>
 
+        <button
+    onclick="shareNews(${news.id}, '${news.title}')"
+    class="news-btn"
+>
+    📤 Share
+</button>
         <a href="news.html?id=${news.id}">
 
           <button class="news-btn">
@@ -526,5 +538,35 @@ function openReels(){
 
   window.location.href =
     "reels.html";
+
+}
+async function shareNews(id, title) {
+
+    const shareUrl =
+        `${window.location.origin}/news.html?id=${id}`;
+
+    if (navigator.share) {
+
+        try {
+
+            await navigator.share({
+                title: title,
+                text: "Ujjain Samachar",
+                url: shareUrl
+            });
+
+        } catch (err) {
+
+            console.log(err);
+
+        }
+
+    } else {
+
+        await navigator.clipboard.writeText(shareUrl);
+
+        alert("Link copied successfully!");
+
+    }
 
 }
