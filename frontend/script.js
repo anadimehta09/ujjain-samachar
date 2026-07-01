@@ -300,15 +300,25 @@ async function searchNews(){
 
 async function likeNews(id){
 
-  await fetch(
-    `https://ujjain-samachar.onrender.com/like-news/${id}`,
-    {
-      method:"PUT"
+    // Check karo ki pehle like kiya hai ya nahi
+    if(localStorage.getItem("liked_" + id)){
+        alert("Aap pehle hi is news ko like kar chuke hain.");
+        return;
     }
-  );
 
-  loadNews();
+    // Backend ko like bhejo
+    await fetch(
+        `https://ujjain-samachar.onrender.com/like-news/${id}`,
+        {
+            method: "PUT"
+        }
+    );
 
+    // Browser mein save kar do ki ye news like ho chuki hai
+    localStorage.setItem("liked_" + id, "true");
+
+    // News dubara load karo
+    loadNews();
 }
 
 async function addComment(id){
