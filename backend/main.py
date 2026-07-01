@@ -8,12 +8,22 @@ from fastapi.staticfiles import StaticFiles
 
 import shutil
 import os
+import cloudinary
+import cloudinary.uploader
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from datetime import datetime
 
 app = FastAPI()
+
 load_dotenv()
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
+)
+
 
 # ================= JWT =================
 
@@ -103,36 +113,24 @@ async def upload_news(
     media: UploadFile = File(...)
 ):
 
-    media_path = f"uploads/{media.filename}"
+    result = cloudinary.uploader.upload(
+        media.file,
+        resource_type="auto"
+    )
 
-    with open(media_path, "wb") as buffer:
-        shutil.copyfileobj(media.file, buffer)
+    media_url = result["secure_url"]
 
     news_count = news_collection.count_documents({})
 
     new_news = {
-
         "id": news_count + 1,
-
         "title": title,
-
         "description": description,
-
-        "media":
-            f"https://ujjain-samachar.onrender.com/{media_path}",
-
-        "type":
-            "video"
-            if media.content_type.startswith("video")
-            else "image",
-
-        "time":
-            datetime.now().strftime(
-                "%d %b %Y | %I:%M %p"
-            )
-            ,
-"likes": 0,
-"comments": []
+        "media": media_url,
+        "type": "video" if media.content_type.startswith("video") else "image",
+        "time": datetime.now().strftime("%d %b %Y | %I:%M %p"),
+        "likes": 0,
+        "comments": []
     }
 
     news_collection.insert_one(new_news)
@@ -140,7 +138,6 @@ async def upload_news(
     return {
         "message": "News Uploaded Successfully"
     }
-
 # ================= DELETE NEWS =================
 
 @app.delete("/delete-news/{news_id}")
