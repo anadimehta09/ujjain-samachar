@@ -70,7 +70,7 @@
     async function loadSingleNews(){
 
       const response = await fetch(
-        `http://127.0.0.1:8000/news/${newsId}`
+        `https://ujjain-samachar.onrender.com/news/${newsId}`
       );
 
       const news = await response.json();
