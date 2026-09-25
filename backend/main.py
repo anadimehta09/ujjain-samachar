@@ -15,6 +15,9 @@ from pymongo import MongoClient
 from datetime import datetime
 
 app = FastAPI()
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
 
 load_dotenv()
 cloudinary.config(
